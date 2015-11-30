@@ -1,0 +1,58 @@
+{% set sitename="Site des points génie" %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}{{sitename}}{% endblock %}</title>
+  {% block meta %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% endblock %}
+  {% block css %}
+    {% if STYLE_URL %}
+      <link rel="stylesheet" href="/{{STYLE_URL}}">
+    {% endif %}
+  {% endblock %}
+</head>
+<body>
+{% block navbar %}
+  <nav role="navigation" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+      <div class="nabar-header">
+        <a class="navbar-brand" href="/" >
+          <span class="eng57logo"></span>
+          {{sitename}}
+        </a>
+      </div>
+      {# needs bootstrap.js and jquery.. <div class="navbar-collapse collapse"> #}
+      <ul id="navbarmenu" class="nav navbar-nav navbar-right">
+        {% block navlinks %}
+        {% endblock %}
+      </ul>
+      {# </div> #}
+    </div>
+  </nav>
+{% endblock %}
+<div class="content-wrapper">
+{% block content %}
+{% endblock %}
+</div>
+<div class="footer">
+  {% block footer %}
+    {% if user || true %}
+      <p>
+        <b>VP 5@8</b> - <a href="mailto:nicolas.couturier@usherbrooke.ca" >Nicolas Couturier</a><br/>
+        <b>Dev</b> - <a href="mailto:david.lalancette@usherbrooke.ca" >David Lalancette</a>
+      </p>
+    {% endif %}
+    <p>
+      <b>Version</b> - {{version}} #{{commit}} -
+      <a href={{"https://raw.githubusercontent.com/dozoisch/pointsgenie/v" + version +"/HISTORY.md"}}>Changelog</a>
+    </p>
+  {% endblock %}
+</div>
+{% block script %}
+  {% if SCRIPT_URL_COMMON %}
+    <script type="text/javascript" src="/{{SCRIPT_URL_COMMON}}"></script>
+  {% endif %}
+{% endblock %}
+</body>
+</html>

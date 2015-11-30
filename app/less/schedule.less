@@ -1,0 +1,18 @@
+@import "constants.less";
+
+.schedule-wrapper {
+  table {
+    td, th {
+      &:not(:first-child) {
+        text-align: center;
+        li+li {
+          border-top: 1px @borderColor solid;
+        }
+      }
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+  }
+}

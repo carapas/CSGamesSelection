@@ -1,0 +1,45 @@
+@import "constants.less";
+
+.user-points-log {
+  table {
+    tr.negative {
+      &,&:hover {
+        td {
+          background-color: @palered;
+        }
+      }
+    }
+    td:first-child {
+      text-align: center;
+    }
+  }
+}
+
+.application-event-selector {
+  display: inline-block;
+  width: 300px;
+  margin-left: 15px;
+}
+
+.user-list {
+  table {
+    .glyphicon + .glyphicon {
+      margin-left: 5px;
+    }
+    td, th {
+      &:not(:first-child) {
+        text-align: center;
+      }
+    }
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.user-info > div + div {
+  border-top: 1px solid #cccccc;
+  margin-top: 10px;
+}

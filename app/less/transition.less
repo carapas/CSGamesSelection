@@ -1,0 +1,43 @@
+@easeInOutQuart: cubic-bezier(0.77, 0, 0.175, 1);
+@percent: 100%;
+@width: 98%;
+
+#transition() {
+  position: absolute;
+  width: @width;
+  transition: all 450ms @easeInOutQuart;
+  -webkit-transition: all 450ms @easeInOutQuart;
+}
+
+#transition-active() {
+  transform: translateX(-@percent);
+  -webkit-transform: translateX(-@percent);
+}
+
+.transition-crop {
+  overflow: hidden;
+  position: relative;
+}
+
+.transition-enter {
+  #transition();
+  opacity: 0.01;
+  left: @percent;
+
+  &.transition-enter-active {
+    #transition-active();
+    opacity: 1;
+  }
+}
+
+.transition-leave {
+  #transition();
+  opacity: 0.75;
+  left: 0;
+
+  &.transition-leave-active  {
+    #transition-active();
+    opacity: 0;
+  }
+}
+
