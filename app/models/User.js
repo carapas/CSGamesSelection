@@ -7,7 +7,6 @@ class User extends Model {
     name: { type: String },
     email: { type: String },
     isAdmin: { type: Boolean },
-    hasPassword: { type: Boolean, private: true },
     created: { type: Date },
     points: [ {
       type: Object,
@@ -17,12 +16,7 @@ class User extends Model {
         points: { type: Number },
       },
     } ],
-    totalPoints: { type: Number },
-    promocard: { type: Object, shape: {
-        price: { type: Number },
-        date: { type: Date },
-      },
-    },
+    totalPoints: { type: Number }
   };
 }
 

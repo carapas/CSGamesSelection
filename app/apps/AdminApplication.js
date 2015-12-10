@@ -1,7 +1,7 @@
 import React, { PropTypes } from "react";
 import TransitionGroup from "react/lib/ReactCSSTransitionGroup";
 
-import { RouteHandler, Link } from "react-router/build/npm/lib";
+import { RouteHandler, Link } from "react-router/build/lib";
 
 import makeFullHeight from "../composition/makeFullHeight";
 
@@ -47,8 +47,7 @@ const AdminApplication = React.createClass({
 const FullHeightAdminApplication = makeFullHeight(AdminApplication, () => {
   let height = window.innerHeight;
   let navbarHeight = document.getElementsByClassName("content-wrapper")[0].getBoundingClientRect().top;
-  let footerHeight = document.getElementsByClassName("footer")[0].offsetHeight;
-  return height - navbarHeight - footerHeight;
+  return height - navbarHeight;
 });
 
 export default FullHeightAdminApplication;

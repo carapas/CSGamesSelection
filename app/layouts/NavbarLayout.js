@@ -2,7 +2,7 @@ import React, { PropTypes } from "react";
 
 import connectToStore from "flummox/connect";
 
-import { Link } from "react-router/build/npm/lib";
+import { Link } from "react-router/build/lib";
 
 import { Navbar, Nav, Glyphicon } from "react-bootstrap";
 import { NavItemLink } from "react-router-bootstrap";
@@ -17,7 +17,7 @@ const NavbarLayout = React.createClass({
   render() {
     const faq = this.props.user ? "faq" : "a-faq";
     return (
-      <Navbar brand={this.renderBrand()} toggleNavKey="0" className="main-navbar" inverse fixedTop>
+      <Navbar brand={this.renderBrand()} toggleNavKey="0" className="main-navbar" fixedTop>
         <Nav navbar collapsible={true} expanded={false} eventKey="0" right>
           <NavItemLink to={faq}><Glyphicon glyph="pushpin"/> FAQ</NavItemLink>
           {this.renderAuthenticatedLinks()}
@@ -28,9 +28,9 @@ const NavbarLayout = React.createClass({
 
   renderBrand() {
     return (
-      <Link to="index">
+      <Link to="faq">
         <span className="eng57logo"></span>
-        Site des points génie
+        Sélection CS Games 2016
       </Link>
     );
   },
@@ -40,9 +40,11 @@ const NavbarLayout = React.createClass({
     if (!username) {
       return null;
     }
+    const admin = this.props.user.isAdmin ? <li key="admin"><a href="/admin#/"><Glyphicon glyph="star" /> Admin</a></li> : <span/>;
     return [
+      (<NavItemLink key="challenges" to="challenges"><Glyphicon glyph="tasks"/> Challenges</NavItemLink>),
       (<NavItemLink key="profile" to="profile"><Glyphicon glyph="user"/> {username}</NavItemLink>),
-      (<li key="admin"><a href="/admin#/"><Glyphicon glyph="star" /> Admin</a></li>),
+      (admin),
       (<NavItemLink key="sginout" to="signout"><Glyphicon glyph="off"/> Déconnexion</NavItemLink>),
     ];
   },

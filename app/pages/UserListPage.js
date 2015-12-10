@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router/build/npm/lib";
+import { Link } from "react-router/build/lib";
 import { Table, Glyphicon, ModalTrigger } from "react-bootstrap";
 import { sortByOrder as _sortByOrder } from "lodash";
 

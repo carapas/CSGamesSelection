@@ -17,10 +17,9 @@ if (process.env.NODE_ENV === "production") {
 
 exports.index = function *() {
   try {
-    const { appString, DATA } = yield prerender(this);
+    const { DATA } = yield prerender(this);
     this.body = yield this.render("index", {
       isAuth: !!this.passport.user,
-      render: appString,
       DATA: JSON.stringify(DATA),
       version: stats.appVersion,
       commit: stats.appCommit,

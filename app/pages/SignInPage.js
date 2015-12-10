@@ -1,6 +1,6 @@
 import React, { PropTypes } from "react";
 
-import { Link } from "react-router/build/npm/lib";
+import { Link } from "react-router/build/lib";
 import { Jumbotron, Col, Input, Button, Row } from "react-bootstrap";
 
 import connectToStore from "flummox/connect";
@@ -29,14 +29,11 @@ const SignIn = React.createClass({
   },
 
   render() {
-    const sitename = "Site des points génie";
+    const sitename = "Sélection CS Games 2016";
     return (
       <div>
         <h1>Connexion <small>| {sitename}</small></h1>
         <Row>
-          <Col md={4}>
-            {this.renderForm()}
-          </Col>
           <Col md={6}>
             <p>Vous devez vous connecter pour accéder au {sitename.toLowerCase()}!</p>
             <p>Pour vous connecter avec vos identifiants de l'université, appuyez sur le bouton USherbrooke.</p>
@@ -44,25 +41,10 @@ const SignIn = React.createClass({
         </Row>
         <Row>
           <Col md={4}>
-            <ul className="otherlogins">
-              <li>
-                {this.renderUdeSButton()}
-              </li>
-            </ul>
+            {this.renderUdeSButton()}
           </Col>
         </Row>
       </div>
-    );
-  },
-
-  renderForm() {
-    return (
-      <form onSubmit={this.handleSubmit} className={this.props.error ? "has-error" : null}>
-        <Input type="text" ref="username" placeholder="cip" label="Cip" />
-        <Input type="password" ref="password" placeholder="mot de passe" label="Mot de passe" />
-        {this.renderErrorBlock()}
-        <Button type="submit" bsStyle="success">Connexion</Button>
-      </form>
     );
   },
 

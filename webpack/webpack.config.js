@@ -81,7 +81,7 @@ export default (options) => {
     plugins: [
       new webpack.PrefetchPlugin("react"),
       new webpack.PrefetchPlugin("react-bootstrap"),
-      new webpack.PrefetchPlugin("react-router/build/npm/lib"),
+      new webpack.PrefetchPlugin("react-router/build/lib"),
       new webpack.PrefetchPlugin("react/lib/ReactComponentBrowserEnvironment"),
       new webpack.PrefetchPlugin("flummox"),
       new webpack.DefinePlugin({

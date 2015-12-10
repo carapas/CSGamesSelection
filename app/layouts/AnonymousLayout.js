@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, RouteHandler } from "react-router/build/npm/lib";
+import { Link, RouteHandler } from "react-router/build/lib";
 
 import { Jumbotron, Nav, Row, Col } from "react-bootstrap";
 

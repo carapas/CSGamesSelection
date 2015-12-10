@@ -1,5 +1,5 @@
 import React, { PropTypes } from "react";
-import { Link } from "react-router/build/npm/lib";
+import { Link } from "react-router/build/lib";
 import { Table, Glyphicon, ModalTrigger } from "react-bootstrap";
 
 import PointsLogModal from "./points-log-modal";

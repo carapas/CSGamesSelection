@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from "react";
 import TransitionGroup from "react/lib/ReactCSSTransitionGroup";
-import { RouteHandler, Link } from "react-router/build/npm/lib";
+import { RouteHandler, Link } from "react-router/build/lib";
 
 import NavBar from "../layouts/NavbarLayout";
 

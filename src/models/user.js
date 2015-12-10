@@ -1,14 +1,9 @@
 /**
  * Dependencies
  */
-var bcrypt = require("../../lib/bcrypt-thunk"); // version that supports yields
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var co = require("co");
-
-var Ldap = require("../../lib/ldap.js");
-// @TODO do me better
-var LdapInstance = new Ldap();
 
 /**
  * Constants
@@ -32,7 +27,6 @@ var UserSchema = new Schema({
     }],
   },
   meta: {
-    password: { type: String },
     provider: {type : String },
     isAdmin: { type: Boolean, default: false }
   }
@@ -46,7 +40,6 @@ var UserSchema = new Schema({
         retVal.id = doc.id;
         retVal.created = doc.meta.created;
         retVal.isAdmin = doc.meta ? doc.meta.isAdmin : undefined;
-        retVal.hasPassword = doc.hasPassword();
         return retVal;
       }
       ret.id = doc._id.toString();
@@ -62,56 +55,14 @@ var UserSchema = new Schema({
 UserSchema.virtual('meta.created').get(function () {
   return this._id.getTimestamp();
 });
-UserSchema.virtual("password").set(function (password) {
-  this.meta.password = password;
-});
-UserSchema.virtual("password").get(function () {
-  return this.meta.password;
-});
 
 /**
  * Middlewares
  */
-UserSchema.pre("save", function (done) {
-
-  // If a modifications has been done on points log, recalculate the total points
-  if (this.isModified("data.points")) {
-    var totalPoints = 0;
-    for (var i = 0; i < this.data.points.length; ++i) {
-      totalPoints += this.data.points[i].points;
-    }
-    this.data.totalPoints = totalPoints;
-  }
-
-  // Only hash the password if it has been modified (or is new)
-  if (!this.meta.password || this.meta.password.length < 1 || !this.isModified("meta.password")) {
-    return done();
-  }
-
-  bcrypt.genSalt(SALT_WORK_FACTOR)
-  .then(function (salt) {
-    return bcrypt.hash(this.meta.password, salt)
-  }.bind(this))
-  .then(function (hash) {
-    this.meta.password = hash;
-    done();
-  }.bind(this))
-  .catch(done);
-});
 
 /**
  * Methods
  */
-
-UserSchema.methods.comparePassword = function *(candidatePassword) {
-  // User password is not set yet
-  if (!this.hasPassword()) { return false; }
-  return yield bcrypt.compare(candidatePassword, this.meta.password);
-};
-
-UserSchema.methods.hasPassword = function () {
-  return (typeof this.meta.password == "string") && (this.meta.password.length > 0);
-};
 
 UserSchema.methods.awardPoints = function (giver, points, rawReason) {
   // Get current date
@@ -134,26 +85,6 @@ UserSchema.statics.findByCip = function (cip) {
   return this.findOne({ "data.cip": cip.toLowerCase() });
 };
 
-UserSchema.statics.findAndComparePassword = function *(cip, password) {
-  var user = yield this.findByCip(cip).exec();
-
-  if (!user) { throw new Error("User not found"); }
-
-  if (yield user.comparePassword(password)) {
-    user.meta.provider = "local";
-    yield user.save();
-    return user;
-  }
-  console.log("findAndComparePassword", "not match")
-  throw new Error("Password does not match");
-};
-
-UserSchema.statics.fetchInfoFromLDAP = function *(cip, user) {
-  var ldapAnswer = yield LdapInstance.searchByCipThunk(cip);
-  fillInfosFromLDAP(ldapAnswer[0], user);
-};
-
-
 UserSchema.statics.findOrCreateUser = function *(profile, casRes) {
   var user = yield this.findOne({ "data.cip": profile.id }).exec();
 
@@ -163,21 +94,11 @@ UserSchema.statics.findOrCreateUser = function *(profile, casRes) {
 
   fillInfosFromCAS(profile, user);
 
-  if (!user.data.email) {
-    // Fetch User infos from LDAP
-    yield this.fetchInfoFromLDAP(profile.id, user);
-  }
-
   user.meta.provider = profile.provider;
   yield user.save();
 
   return user;
 };
-
-function fillInfosFromLDAP (profile, user) {
-  user.data.email = profile.mail
-  user.data.name = profile.cn;
-}
 
 function fillInfosFromCAS (profile, user) {
   if (!profile.emails) {

@@ -1,5 +1,5 @@
 import React from "react";
-import Router from "react-router/build/npm/lib";
+import Router from "react-router/build/lib";
 
 import "./less/main.less";
 
