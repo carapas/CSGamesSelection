@@ -15,11 +15,9 @@ const NavbarLayout = React.createClass({
   },
 
   render() {
-    const faq = this.props.user ? "faq" : "a-faq";
     return (
       <Navbar brand={this.renderBrand()} toggleNavKey="0" className="main-navbar" fixedTop>
         <Nav navbar collapsible={true} expanded={false} eventKey="0" right>
-          <NavItemLink to={faq}><Glyphicon glyph="pushpin"/> FAQ</NavItemLink>
           {this.renderAuthenticatedLinks()}
         </Nav>
       </Navbar>
@@ -28,9 +26,9 @@ const NavbarLayout = React.createClass({
 
   renderBrand() {
     return (
-      <Link to="faq">
+      <Link to="challenges">
         <span className="eng57logo"></span>
-        Sélection CS Games 2016
+        Sélection CS Games 2017
       </Link>
     );
   },
@@ -42,6 +40,7 @@ const NavbarLayout = React.createClass({
     }
     const admin = this.props.user.isAdmin ? <li key="admin"><a href="/admin#/"><Glyphicon glyph="star" /> Admin</a></li> : <span/>;
     return [
+      (<NavItemLink key="leaderboard" to="leaderboard"><Glyphicon glyph="stats"/> Leaderboard</NavItemLink>),
       (<NavItemLink key="challenges" to="challenges"><Glyphicon glyph="tasks"/> Challenges</NavItemLink>),
       (<NavItemLink key="profile" to="profile"><Glyphicon glyph="user"/> {username}</NavItemLink>),
       (admin),

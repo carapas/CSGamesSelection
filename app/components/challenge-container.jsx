@@ -16,15 +16,16 @@ const ChallengeContainer = React.createClass({
   },
 
   render() {
-    let challenge = this.props.challenge;
+    let { challenge, result } = this.props;
+    let type = challenge.isCodingChallenge ? 'Coding challenge' : 'Capture the flag';
     return (
       <div key={challenge.name} className="challenge-container well row">
-        <div className="col-md-2">
-          <h4 style={{margin: '0px'}}>{challenge.name}</h4>
-          <h5><Glyphicon glyph="flash" /> 0/1</h5>
+        <div className="col-md-6">
+          <h4 style={{margin: '0px'}}>{challenge.name} ({type})</h4>
+          <h5><Glyphicon glyph="flash" /> {`${result.points}/${challenge.points}`}</h5>
         </div>
         <ButtonToolbar className="col-md-4" style={{display: 'flex', alignItems: 'center', marginLeft: 'auto'}}>
-          <button onClick={() => {this.transitionTo("defi", {defi: challenge.name});}} type="button" style={{height: '40px', width: '140px', marginRight: '10px', right: '290px'}} className="green">Résourdre</button> 
+          <button onClick={() => {this.transitionTo("defi", {defi: challenge.name});}} type="button" style={{height: '40px', width: '140px', marginRight: '10px', right: '290px'}} className="green">Résoudre</button> 
           <button onClick={this.toggleModal} type="button" style={{height: '40px', width: '140px'}} className="gray">Description</button> 
         </ButtonToolbar>
         <Modal show={this.state.showModal} onHide={this.toggleModal}>

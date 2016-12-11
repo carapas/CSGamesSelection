@@ -27,7 +27,9 @@ module.exports = function (app, passport) {
   router.post("/signin", authController.signIn);
   router.post("/signout", authController.signOut);
 
-  challengeController.init();
+  challengeController.init(challenges => {
+    codeController.init(challenges);
+  });
 
   /******** secured routes ********/
   securedRouter.use(accessRights.isConnected);
@@ -35,6 +37,8 @@ module.exports = function (app, passport) {
   securedRouter.get("/users/me", authController.getCurrentUser);
   securedRouter.get("/challenges", challengeController.getAll);
   securedRouter.get("/challenges/:challenge/result", challengeController.getResult);
+  securedRouter.get("/results", challengeController.getResults);
+
   securedRouter.post("/codes", codeController.saveCode);
   securedRouter.post("/codes/submit", codeController.submit);
   securedRouter.get("/codes", codeController.getChallengeCodes);

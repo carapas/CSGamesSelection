@@ -75,7 +75,8 @@ const ResultPage = React.createClass({
 
     return (
       <div className="row">
-        <Jumbotron style={{padding: '20px', marginRight: '20px', width: '312px', position: 'relative'}} className='well col-md-offset-4 col-md-2'>
+        <div className="col-md-6">
+        <Jumbotron style={{padding: '20px', marginLeft: 'auto', marginRight: '20px', width: '312px', position: 'relative'}} className='well'>
           <h3 style={{marginTop: '0px', fontWeight: 'bold', fontSize: '16px'}}>Score</h3>
           <Doughnut data={chartData} width="250" height="250" redraw />
           <h2 style={style}>{`${this.state.result.percent*100}%`}</h2>
@@ -84,12 +85,15 @@ const ResultPage = React.createClass({
             <button onClick={() => {this.transitionTo("challenges");}} style={{width: '49%', height:'50px'}} className="gray" type="button">New Challenge</button>
           </ButtonToolbar>
         </Jumbotron>
-        <Jumbotron className="well col-md-2" style={{width: '400px'}}>
-          <h3 style={{marginTop: '0px', fontWeight: 'bold', fontSize: '16px'}}>Tests</h3>
-          <ul style={{'padding': '0px'}}>
-            {this.renderTests()}
-          </ul>
-        </Jumbotron>
+        </div>
+        <div className="col-md-6">
+          <Jumbotron className="well" style={{width: '400px'}}>
+            <h3 style={{marginTop: '0px', fontWeight: 'bold', fontSize: '16px'}}>Tests</h3>
+            <ul style={{'padding': '0px'}}>
+              {this.renderTests()}
+            </ul>
+          </Jumbotron>
+        </div>
       </div>
     )
   },

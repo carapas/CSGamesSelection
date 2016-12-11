@@ -29,7 +29,7 @@ const SignIn = React.createClass({
   },
 
   render() {
-    const sitename = "Sélection CS Games 2016";
+    const sitename = "Sélection CS Games 2017";
     return (
       <div>
         <h1>Connexion <small>| {sitename}</small></h1>

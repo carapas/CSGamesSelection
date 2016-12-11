@@ -3,12 +3,15 @@ var Result = require("mongoose").model("Result");
 
 let challenges = [];
 
-exports.init = function() {
+exports.init = function(callback) {
   let path = `${__dirname}/../challenges/descriptions`;
   fs.readdir(path, function(err, files) {
     for (var file of files) {
-      challenges.push({name: file.split('.')[0], content: fs.readFileSync(`${path}/${file}`, 'utf8')})
+      let name = file.split('.')[0];
+      let challengeConfig = require(`../challenges/tests/${name}.js`);
+      challenges.push({name: name, content: fs.readFileSync(`${path}/${file}`, 'utf8'), points: challengeConfig.points, category: challengeConfig.category, isCodingChallenge: challengeConfig.isCodingChallenge})
     }
+    callback(challenges);
   });
 }
 
@@ -29,3 +32,14 @@ exports.getResult = function *() {
   	this.status = 404;
   }
 };
+
+exports.getResults = function *() {
+  let cip = this.passport.user.data.cip;
+  let results = yield Result.find({cip: cip});
+  if  (!results) {
+    results = [];
+  }
+
+  this.body = {results: results};
+  this.status = 200;
+}

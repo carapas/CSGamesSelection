@@ -1,8 +1,21 @@
 var User = require("mongoose").model("User");
+var Result = require("mongoose").model("Result");
 
 exports.readAll = function *() {
+  let result = [];
   var users = yield User.find({}).sort("-meta.isAdmin data.cip").exec();
-  this.body = { users: users };
+  let usersObj = {};
+  for (let user of users) {
+    usersObj[user.data.cip] = user;
+  }
+
+  let points = yield Result.getUsersPoints().exec();
+  for (let point of points) {
+    usersObj[point._id].data.totalPoints = point.points;
+    result.push(usersObj[point._id]);
+  }
+
+  this.body = { users: result };
 };
 
 exports.getCurrentUser = function *() {

@@ -3,6 +3,14 @@ var Result = require("mongoose").model("Result");
 var Tester = require('../challenges/tests/tester');
 var fs = require('fs');
 
+let _challenges = {}
+
+exports.init = function (challenges) {
+  challenges.forEach(challenge => {
+    _challenges[challenge.name] = challenge;
+  });
+}
+
 exports.saveCode = function *() {
   let user = this.passport.user;
   let code = this.request.body.code;
@@ -41,6 +49,7 @@ exports.submit = function *() {
   let result = tester.run();
   result.cip = cip;
   result.challenge = code.challenge;
+  result.points = _challenges[code.challenge].points * result.percent;
   let resp = yield Result.save(result);
   if (resp.ok) {
     this.status = 200;

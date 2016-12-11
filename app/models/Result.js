@@ -5,6 +5,7 @@ class Result extends Model {
 	cip: {type: String},
 	challenge: {type: String},
 	percent: {type: Number},
+	points: {type: Number},
 	results: [{
 	  type: Object,
 	  shape: {

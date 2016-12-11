@@ -13,7 +13,7 @@ class ChallengeApi extends ResourceApi {
 
   getChallengeResult(challenge) {
     let URL = this._getResourceUrl();
-    URL += `/${challenge}/result`
+    URL += `/${challenge}/result`;
     return this._doGet(URL).then(res => this._resultResponse(res));
   }
 
