@@ -82,6 +82,7 @@ const ChallengePage = React.createClass({
 
   saveCode(){
     codeApi.create({language: this.state.language, challenge: this.state.challenge.name, code: this.state.code});
+    user.language = this.state.language;
     let codes = this.state.codes;
     codes[this.state.language] = this.state.code;
     this.setState({codes: codes});

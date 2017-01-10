@@ -4,19 +4,26 @@ module.exports = {timeAllowed: 5, points: 8, category: 'Reverse', isCodingChalle
 	{name: 'Random test', inputs: ['0x67cbfe10'], outputs: ['j3', 'l3', 'is', 'ks']}],python: `ecx = raw_input()`, javascript:
 `var fs = require('fs');
 try{
-  var response = fs.readSync(process.stdin.fd, 10000, 0, "utf8");
+  var BUFSIZ = 65536;
+  var buf = new Buffer(BUFSIZ);
+  var nbytes = fs.readSync(process.stdin.fd, buf, 0, BUFSIZ, null);
+  var stopIdx = buf.indexOf(0);
+  buf = buf.slice(0,stopIdx);
 } catch(e) {
   var response = [''];
-  console.warn('No inputs in input-search');
+  console.warn(e);
+  console.warn('No inputs in scrabble');
 }
-var lines__ = response[0].split('\\r\\n');
-var idx__ = 0;
 
+var response = buf.toString('utf-8');
+var lines__ = response.split('\r\n');
+var idx__ = 0;
 
 var readline = () => {
     idx__++;
     return lines__[idx__-1];
 };
+
 
 var ecx = readline();
 `};

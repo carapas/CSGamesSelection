@@ -17,7 +17,8 @@ exports.saveCode = function *() {
   let code = this.request.body.code;
   code.cip = user.data.cip;
   user.data.language = code.language;
-  yield User.update({cip: user.cip}, user);
+  user.id = undefined;
+  yield User.update({cip: user.cip}, {$set: {"data.language": code.language}});
   let resp = yield Code.save(code);
   if (resp.ok) {
     this.body = { code: code };
@@ -46,7 +47,7 @@ exports.submit = function *() {
   let deleteResp = yield Result.remove({challenge: code.challenge, cip: cip});
   let fileExtension = code.language === 'python' ? '.py' : '.js';
   user.language = code.language;
-  yield User.update({cip: user.cip}, user);
+  yield User.update({cip: user.cip}, {$set: {"data.language": code.language}});
   let bin = code.language === 'python' ? 'python' : 'node';
   fs.writeFileSync(`${__dirname}/../challenges/codes/${cip}${fileExtension}`, code.code);
   var tester = new Tester(`${__dirname}/../challenges/codes/${cip}${fileExtension}`, bin);

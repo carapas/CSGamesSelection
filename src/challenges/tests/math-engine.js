@@ -219,19 +219,26 @@ module.exports = {timeAllowed: 2, points: 2, category: 'Software', isCodingChall
 ], python:`jsonString = raw_input()`, javascript:
 `var fs = require('fs');
 try{
-  var response = fs.readSync(process.stdin.fd, 10000, 0, "utf8");
+  var BUFSIZ = 65536;
+  var buf = new Buffer(BUFSIZ);
+  var nbytes = fs.readSync(process.stdin.fd, buf, 0, BUFSIZ, null);
+  var stopIdx = buf.indexOf(0);
+  buf = buf.slice(0,stopIdx);
 } catch(e) {
   var response = [''];
-  console.warn('No inputs in math-engine');
+  console.warn(e);
+  console.warn('No inputs in scrabble');
 }
-var lines__ = response[0].split('\\r\\n');
-var idx__ = 0;
 
+var response = buf.toString('utf-8');
+var lines__ = response.split('\r\n');
+var idx__ = 0;
 
 var readline = () => {
     idx__++;
     return lines__[idx__-1];
 };
+
 
 var jsonString = readline();
 `};
