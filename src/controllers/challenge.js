@@ -10,7 +10,7 @@ exports.init = function(callback) {
     for (var file of files) {
       let name = file.split('.')[0];
       let challengeConfig = require(`../challenges/tests/${name}.js`);
-      challenges.push({name: name, content: fs.readFileSync(`${path}/${file}`, 'utf8'), points: challengeConfig.points, category: challengeConfig.category, isCodingChallenge: challengeConfig.isCodingChallenge})
+      challenges.push({name: name, content: fs.readFileSync(`${path}/${file}`, 'utf8'), points: challengeConfig.points, category: challengeConfig.category, isCodingChallenge: challengeConfig.isCodingChallenge, python: challengeConfig.python, javascript: challengeConfig.javascript});
     }
     callback(challenges);
   });
@@ -19,7 +19,7 @@ exports.init = function(callback) {
 exports.getAll = function *() {
   let cip = this.passport.user.data.cip;
   let result = yield Result.findOne({cip: cip, challenge: 'tutoriel'});
-  if (result.points) {
+  if (result && result.points) {
     this.body = {challenges: challenges};
   } else {
     var idx = _.findIndex(challenges, {name: 'tutoriel'});

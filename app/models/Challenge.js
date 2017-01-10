@@ -6,7 +6,9 @@ class Challenge extends Model {
     content: {type: String},
     points: {type: Number},
     category: {type: String},
-    isCodingChallenge: {type: Boolean}
+    isCodingChallenge: {type: Boolean},
+    python: {type: String},
+    javascript: {type: String}
   };
 }
 

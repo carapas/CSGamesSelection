@@ -34,7 +34,7 @@ const NavbarLayout = React.createClass({
   },
 
   renderAuthenticatedLinks() {
-    const username = this.props.user ? this.props.user.name : "";
+    const username = this.props.user ? this.props.user.cip : '';
     if (!username) {
       return null;
     }

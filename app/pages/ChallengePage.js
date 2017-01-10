@@ -23,7 +23,7 @@ const ChallengePage = React.createClass({
     return {
       challenge: {},
       hoverButton: '',
-      language: this.props.user.language,
+      language: this.props.user && this.props.user.language ? this.props.user.language : 'python',
       code: '',
       codes: {}
     };
@@ -49,10 +49,16 @@ const ChallengePage = React.createClass({
     let challenge = ChallengeStore.getChallenge(this.props.params.defi);
     codeApi.getChallengeCodes(challenge.name).then((codes) => {
       let codeObj = {};
-      console.log(codes);
       for(let code of codes) {
         codeObj[code.language] = code.code;
       }
+      if(!codeObj.python) {
+        codeObj.python = challenge.python;
+      }
+      if(!codeObj.javascript) {
+        codeObj.javascript = challenge.javascript;
+      }
+
       this.setState({codes: codeObj, code: codeObj[this.state.language]});
     });
     this.setState({challenge: challenge});

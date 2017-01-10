@@ -36,9 +36,10 @@ const LeaderboardPage = React.createClass({
     return this.state.users.map((user) => {
       idx++;
       let rowStyle = idx % 2 == 0 ? 'row-leaderboard' : 'row2-leaderboard';
+      let name = user.name ? user.name : user.cip;
       return (<div className={`row text-center ${rowStyle}`}>
         <h5 className="col-md-2">{idx}</h5>
-        <h5 className="col-md-8">{user.name}</h5>
+        <h5 className="col-md-8">{name}</h5>
         <h5 className="col-md-2">{user.totalPoints}</h5>
       </div>)
     })

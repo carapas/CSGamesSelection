@@ -19,7 +19,7 @@ import LeaderboardPage from "../app/pages/LeaderboardPage";
 const routes = (
   <Route handler={MainApplication}>
     <Route name="home" path="/" handler={UserLayout}>
-      <DefaultRoute name="challenges" path="defis" handler={ChallengesPage} />
+      <DefaultRoute name="challenges" handler={ChallengesPage} />
       <Route name="profile" path="profile" handler={ProfilePage} />
       <Route name="students" path="students" handler={UserListPage} />
       <Route name="leaderboard" path="/leaderboard" handler={LeaderboardPage} />

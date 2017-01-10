@@ -216,4 +216,22 @@ module.exports = {timeAllowed: 2, points: 2, category: 'Software', isCodingChall
 	{name: 'Simple puissance', inputs: [JSON.stringify(e)], outputs: ['16']},
 	{name: 'Simple ordre des opérations', inputs: [JSON.stringify(f)], outputs: ['2']},
 	{name: 'Opération complexe', inputs: [JSON.stringify(g)], outputs: ['248']}
-]};
+], python:`jsonString = raw_input()`, javascript:
+`var fs = require('fs');
+try{
+  var response = fs.readSync(process.stdin.fd, 10000, 0, "utf8");
+} catch(e) {
+  var response = [''];
+  console.warn('No inputs in math-engine');
+}
+var lines__ = response[0].split('\\r\\n');
+var idx__ = 0;
+
+
+var readline = () => {
+    idx__++;
+    return lines__[idx__-1];
+};
+
+var jsonString = readline();
+`};
