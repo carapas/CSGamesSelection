@@ -5,6 +5,7 @@ import Markdown from 'react-remarkable';
 import AceEditor from 'react-ace';
 import Infinite from 'react-infinite';
 import CodeApi from "../api/CodeApi"
+import connectToStore from "flummox/connect";
 import _ from "lodash";
 import { Navigation } from 'react-router/build/lib';
 
@@ -22,7 +23,7 @@ const ChallengePage = React.createClass({
     return {
       challenge: {},
       hoverButton: '',
-      language: 'python',
+      language: this.props.user.language,
       code: '',
       codes: {}
     };
@@ -104,9 +105,11 @@ const ChallengePage = React.createClass({
           <option value="python">Python 2.7</option>
           <option value="javascript">JavaScript</option>
         </Input>
-        <div className="text-center" style={{position: "absolute", backgroundColor: "#27333E", color: "#f0f0f0", left: `${border}px`, top: `${topBorder}px`, height: `${this.state.height-botBorder-topBorder}px`, width: `${this.state.width/2-2*border}px`}}>
+        <div style={{position: "absolute", backgroundColor: "#27333E", color: "#f0f0f0", left: `${border}px`, top: `${topBorder}px`, height: `${this.state.height-botBorder-topBorder}px`, width: `${this.state.width/2-2*border}px`}}>
           <Infinite containerHeight={this.state.height-botBorder-topBorder} elementHeight={40}>
-            <Markdown source={this.state.challenge.content} />
+            <div style={{margin: '10px'}}>
+              <Markdown source={this.state.challenge.content} />
+            </div>
           </Infinite>
         </div>
         <div style={{position: "absolute", top: `${topBorder}px`, left: `${this.state.width/2 + border}px`}}>
@@ -129,4 +132,10 @@ const ChallengePage = React.createClass({
   },
 });
 
-export default ChallengePage;
+const ConnectedChallenge = connectToStore(ChallengePage, {
+  auth: store => ({
+    user: store.getAuthenticatedUser(),
+  })
+});
+
+export default ConnectedChallenge;

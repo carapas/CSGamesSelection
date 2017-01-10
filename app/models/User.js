@@ -5,6 +5,7 @@ class User extends Model {
     id: { type: String },
     cip: { type: String },
     name: { type: String },
+    language: { type: String },
     email: { type: String },
     isAdmin: { type: Boolean },
     created: { type: Date },

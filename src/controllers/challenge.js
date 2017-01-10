@@ -1,5 +1,6 @@
 var fs = require('fs');
 var Result = require("mongoose").model("Result");
+var _ = require('lodash');
 
 let challenges = [];
 
@@ -16,7 +17,15 @@ exports.init = function(callback) {
 }
 
 exports.getAll = function *() {
-  this.body = {challenges: challenges};
+  let cip = this.passport.user.data.cip;
+  let result = yield Result.findOne({cip: cip, challenge: 'tutoriel'});
+  if (result.points) {
+    this.body = {challenges: challenges};
+  } else {
+    var idx = _.findIndex(challenges, {name: 'tutoriel'});
+    this.body = {challenges: [challenges[idx]]};
+  }
+
   this.status = 200;
 };
 

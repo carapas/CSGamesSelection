@@ -1,4 +1,5 @@
 var Code = require("mongoose").model("Code");
+var User = require("mongoose").model("User");
 var Result = require("mongoose").model("Result");
 var Tester = require('../challenges/tests/tester');
 var fs = require('fs');
@@ -15,6 +16,8 @@ exports.saveCode = function *() {
   let user = this.passport.user;
   let code = this.request.body.code;
   code.cip = user.data.cip;
+  user.data.language = code.language;
+  yield User.update({cip: user.cip}, user);
   let resp = yield Code.save(code);
   if (resp.ok) {
     this.body = { code: code };
@@ -43,6 +46,19 @@ exports.submit = function *() {
   let deleteResp = yield Result.remove({challenge: code.challenge, cip: cip});
   let fileExtension = code.language === 'python' ? '.py' : '.js';
   let bin = code.language === 'python' ? 'python' : 'node';
+  if (code.language == 'javascript') {
+    code.code = `var fs = require('fs');
+var response = fs.readSync(process.stdin.fd, 10000, 0, "utf8");
+var lines__ = response[0].split('\\r\\n');
+var idx__ = 0;
+
+var readline = () => {
+    idx__++;
+    return lines__[idx__-1];
+};
+${code.code}`;
+  }
+
   fs.writeFileSync(`${__dirname}/../challenges/codes/${cip}${fileExtension}`, code.code);
   var tester = new Tester(`${__dirname}/../challenges/codes/${cip}${fileExtension}`, bin);
   tester.setTest(require(`${__dirname}/../challenges/tests/${code.challenge}.js`));

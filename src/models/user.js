@@ -13,6 +13,7 @@ const SALT_WORK_FACTOR = 10;
 var UserSchema = new Schema({
   data: {
     cip: { type: String, required: true, unique: true, lowercase: true, match: /^[a-z]{4}\d{4}$/ },
+    language: { type: String },
     email: { type: String, lowercase: true },
     name: { type: String },
     concentration: { type: Number },

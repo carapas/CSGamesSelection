@@ -9,9 +9,6 @@ const challengeApi = new ChallengeApi();
 
 var ChallengeStore = {
   init: function () {
-    if(_initCalled)
-      return;
-    _initCalled = true;
     this.fetchAll();
   },
   fetchAll: function () {
