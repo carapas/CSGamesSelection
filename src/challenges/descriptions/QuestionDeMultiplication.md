@@ -11,47 +11,47 @@ Bonne chance!
 **Ligne 1**: Un nombre quelquonque
 
 ### Exemple
-**Input**
+**Input 1**
 ```
 1
 ```
-**Output**
+**Output 1**
 ```
 2
 ```
-
-**Input**
+---
+**Input 2**
 ```
 1,2,3
 ```
-**Output**
+**Output 2**
 ```
 30
 ```
-
-**Input**
+---
+**Input 3**
 ```
 2,4,10
 ```
-**Output**
+**Output 3**
 ```
 609
 ```
-
-**Input**
+---
+**Input 4**
 ```
 2
 ```
-**Output**
+**Output 4**
 ```
 3
 ```
-
-**Input**
+---
+**Input 5**
 ```
 1,2
 ```
-**Output**
+**Output 5**
 ```
 6
 ```
