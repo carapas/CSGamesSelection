@@ -11,6 +11,11 @@ Chaque challenge dispose d'un nombre de force différent dépendemment de la dif
 ## Comment ça marche?
 Les défis de programmation sont de type stdin et stdout. C'est à dire que vous lirez les inputs à partir des entrées de la console et que vous envoierez les résultats de vos algorithmes par stdout.
 
+## Tester localement (**Extremement utile**)
+Vous avez accès à un script utilitaire qui agit exactement comme le serveur. Le [Validator](https://github.com/carapas/CSGamesSelectionPublic/tree/master/Validator) vous permet de tester les challenges que vous voulez localement. Pour ce faire, vous devez lui fournir un script et fichier de test comme [celui-ci](https://github.com/carapas/CSGamesSelectionPublic/blob/master/Tutoriel/tutoriel.js).
+
+Tous les fichiers sont disponible sur le [github publique des sélections](https://github.com/carapas/CSGamesSelectionPublic).
+
 ### stdin
 **python**
 ```
@@ -20,10 +25,27 @@ input2 = raw_input()
 
 **javascript**
 ```
-var fs = require('fs');
-var response = fs.readSync(process.stdin.fd, 10000, 0, "utf8");
-var lines__ = response[0].split('\r\n');
-var idx__ = 0;
+"use strict";
+
+const fs = require("fs");
+
+const BUFSIZ = 65536;
+let buf = new Buffer(BUFSIZ);
+buf.fill('\x00');
+let response = [""];
+try {
+  fs.readSync(process.stdin.fd, buf, 0, BUFSIZ, null);
+  const stopIdx = buf.indexOf(0);
+  buf = buf.slice(0,stopIdx);
+} catch(e) {
+  console.warn(e);
+  console.warn("No inputs in defi");
+  process.exit(1);
+}
+
+response = buf.toString("utf-8");
+let idx__ = 0;
+let lines__ = response.split('\r\n');
 
 var readline = () => {
     idx__++;
