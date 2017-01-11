@@ -2,7 +2,7 @@
 ## Le but
 En tant que super ninja guru full-stack pirate software engineer, vous décidez de faire un REST api qui agit comme une calculatrice.
 Vous pourrez lui envoyer des requêtes avec des objets JSON et l'API devra retourner la réponse de l'opération.
-Par contre, le format des requêtes ont déjà été établi par un collègue qui n;avait vraisemblablement aucune idée comment faire des objets JSON.
+Par contre, le format des requêtes ont déjà été établi par un collègue qui n'avait vraisemblablement aucune idée comment faire des objets JSON.
 Malgré votre rage intérieure, vous calculez qu'il prendra moins de temps faire l'API avec un format qui laisse à désirer que de le faire changer dans le front-end.
 
 ## Règles

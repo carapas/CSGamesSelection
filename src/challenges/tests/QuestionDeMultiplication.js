@@ -1,7 +1,9 @@
-module.exports = {timeAllowed: 5, points: 8, category: 'Reverse', isCodingChallenge: true, tests: [
-	{name: 'Exemple', inputs: ['0xe5e7fe10'], outputs: ['12','32','2r','4r']},
-	{name: 'Overflow test', inputs: ['0x63cdfe10'], outputs: ['f1','h1','eq','gq']},
-	{name: 'Random test', inputs: ['0x67cbfe10'], outputs: ['j3', 'l3', 'is', 'ks']}],python: `ecx = raw_input()`, javascript:
+module.exports = {timeAllowed: 2, points: 4, category: 'Reverse', isCodingChallenge: true, tests: [
+	{name: 'Easy', inputs: ['1'], outputs: ['2']},
+	{name: 'Medium', inputs: ['1,2,3,4'], outputs: ['210']},
+  {name: 'Saignant', inputs: ['2,4,9'], outputs: ['483']},
+  {name: 'Higher!', inputs: ['10,1,3,9,2,15'], outputs: ['940470']},
+  {name: 'HowCanThisBe?', inputs: ['1,2'], outputs: ['6']}],python: `csv = raw_input()`, javascript:
 `"use strict";
 
 const fs = require("fs");
@@ -30,5 +32,5 @@ var readline = () => {
 };
 
 
-var ecx = readline();
+var csv = readline();
 `};

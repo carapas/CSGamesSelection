@@ -79,7 +79,7 @@ const ResultPage = React.createClass({
         <Jumbotron style={{padding: '20px', marginLeft: 'auto', marginRight: '20px', width: '312px', position: 'relative'}} className='well'>
           <h3 style={{marginTop: '0px', fontWeight: 'bold', fontSize: '16px'}}>Score</h3>
           <Doughnut data={chartData} width="250" height="250" redraw />
-          <h2 style={style}>{`${this.state.result.percent*100}%`}</h2>
+          <h2 style={style}>{`${Math.floor(this.state.result.percent*100)}%`}</h2>
           <ButtonToolbar style={{marginTop: '10px'}}>
             <button onClick={() => {this.transitionTo("defi", this.props.params);}} style={{width: '49%', marginRight: '2%', height:'50px'}} className="green" type="button">Try again</button>
             <button onClick={() => {this.transitionTo("challenges");}} style={{width: '49%', height:'50px'}} className="gray" type="button">New Challenge</button>

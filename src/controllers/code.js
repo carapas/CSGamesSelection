@@ -55,7 +55,7 @@ exports.submit = function *() {
   let result = tester.run();
   result.cip = cip;
   result.challenge = code.challenge;
-  result.points = _challenges[code.challenge].points * result.percent;
+  result.points = Math.floor(_challenges[code.challenge].points * result.percent);
   let resp = yield Result.save(result);
   if (resp.ok) {
     this.status = 200;
