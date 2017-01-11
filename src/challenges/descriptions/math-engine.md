@@ -26,12 +26,12 @@ Voici le format des objets JSON:
   operators: [
 	{
 		type: 'string' || 'number',
-		content: '+' || '-' || '/' || '*' || '(' || ')' || '^' || 12355224637547
+		content: '+' || '-' || '/' || '*' || '(' || ')' || '^' || 12355224637547 (chiffre quelquonque)
 		position: chiffre représentant la position du chiffre ou de l'opérateur dans l'équation mathématique (débute à 0)
 	},
 	{
 		type: 'string' || 'number',
-		content: '+' || '-' || '/' || '*' || '(' || ')' || '^' || 12355224637547
+		content: '+' || '-' || '/' || '*' || '(' || ')' || '^' || 12355224637547 (chiffre quelquonque)
 		position: chiffre représentant la position du chiffre ou de l'opérateur dans l'équation mathématique (débute à 0)
 	} ...
   ]
