@@ -34,5 +34,6 @@ Puisque c'est un défi de sécurité, il n'y a pas plus d'information que la mis
 ```
 **Output**
 ```
-halifaxstevefinger
+chicoutimi
+david lalancette
 ```
