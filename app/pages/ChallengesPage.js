@@ -2,6 +2,7 @@ import React from "react";
 import ChallengeStore from "../stores/challenge";
 import ChallengeContainer from "../components/challenge-container"
 import ResultApi from "../api/ResultApi";
+import {Glyphicon} from "react-bootstrap";
 import _ from "lodash";
 let resultApi = new ResultApi();
 
@@ -57,8 +58,17 @@ const ChallengesPage = React.createClass({
 
     let categories = _.groupBy(this.state.challenges, 'category');
     let catArr = [];
+    let points = {};
     for (let category in categories) {
+      let totalPoints = 0;
+      let userPoints = 0;
+      for (let challenge of categories[category]) {
+        totalPoints += challenge.points;
+        userPoints += this.state.results[challenge.name] ? this.state.results[challenge.name].points : 0;
+      }
+
       catArr.push(category);
+      points[category] = `${userPoints}/${totalPoints}`;
     }
     return catArr.map(category => {
       let challenges = <div />;
@@ -72,7 +82,12 @@ const ChallengesPage = React.createClass({
 
       return (
           <div className="category-container">
-            <div className="row category-header" onClick={() => {this.setState({curCategory: newState});}}><h4 className="col-md-11">{category} ({categories[category].length})</h4><span style={{fontSize: '24px', lineHeight: '38px'}} className={`glyphicon glyphicon-menu-${glyph}`}></span></div>
+            <div className="row category-header" onClick={() => {this.setState({curCategory: newState});}}>
+              <h4 className="col-md-11">
+                {category} ({categories[category].length} challenges) - {points[category]} <Glyphicon glyph="flash" /> 
+              </h4>
+              <span style={{fontSize: '24px', lineHeight: '38px'}} className={`glyphicon glyphicon-menu-${glyph}`}></span>
+            </div>
             {challenges}
           </div>
         )

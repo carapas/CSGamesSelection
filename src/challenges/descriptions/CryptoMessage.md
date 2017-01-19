@@ -26,9 +26,9 @@ Vous devez outputer dans le stdout le message.
 ### Exemple
 **Input**
 ```
-H1JDNgBKO0cWNEECBRpaLhMcIEdDFh1eO18cK1ZPVR9SIkBZMFZDFhpSJ18cPVQGVRxWa19eNkAXVQJSOB1ZGVZDERdFOVIQIBMGAQBWa0MVJkBDGBdQI1IXJx0=
+EFYAHFJ9bFYKJxMzFAETPl1ZHgAQBhNULhI==
 ```
 **Output**
 ```
-La Cryptographie est complexe, mais ce challenge ne l'est pas. Je devrais etre plus mechant.
+Ceci N'est Pas un M3ssage!
 ```

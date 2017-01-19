@@ -7,7 +7,15 @@ module.exports = {timeAllowed: 2, points: 4, category: 'OS', isCodingChallenge: 
                              'MOV c 3',
                              'XOR b c',
                              'MOV d 1',
-                             'ADD d 2'], outputs: ['1','1','3','3']}],python: 
+                             'ADD d 2'], outputs: ['1','1','3','3']}, 
+  {name: 'Jumping', inputs: ['7',
+                            'MOV c 40',
+                            'MOV a 10',
+                            'ADD b 2',
+                            'SUB c 2',
+                            'CMP a b',
+                            'JNE 2',
+                            'XOR a a'], outputs: ['0','10','30','0']}],python: 
 `N = int(raw_input())
 for i in xrange(N):
   cmd = raw_input()
