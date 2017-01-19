@@ -1,4 +1,4 @@
-module.exports = {timeAllowed: 2, points: 4, category: 'OS', isCodingChallenge: true, tests: [
+module.exports = {timeAllowed: 2, points: 8, category: 'OS', isCodingChallenge: true, tests: [
 	{name: 'Exemple', inputs: ['8',
                              'MOV a 3',
                              'XOR a 1',
