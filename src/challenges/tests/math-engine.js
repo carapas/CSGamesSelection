@@ -213,9 +213,7 @@ module.exports = {timeAllowed: 2, points: 2, category: 'Software', isCodingChall
 	{name: 'Simple soustraction', inputs: [JSON.stringify(b)], outputs: ['3']},
 	{name: 'Simple division', inputs: [JSON.stringify(c)], outputs: ['2']},
 	{name: 'Simple multiplication', inputs: [JSON.stringify(d)], outputs: ['8']},
-	{name: 'Simple puissance', inputs: [JSON.stringify(e)], outputs: ['16']},
-	{name: 'Simple ordre des opérations', inputs: [JSON.stringify(f)], outputs: ['2']},
-	{name: 'Opération complexe', inputs: [JSON.stringify(g)], outputs: ['248']}
+	{name: 'Simple ordre des opérations', inputs: [JSON.stringify(f)], outputs: ['2']}
 ], python:`jsonString = raw_input()`, javascript:
 `"use strict";
 
