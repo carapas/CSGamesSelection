@@ -11,8 +11,10 @@ exports.readAll = function *() {
 
   let points = yield Result.getUsersPoints().exec();
   for (let point of points) {
-    usersObj[point._id].data.totalPoints = point.points;
-    result.push(usersObj[point._id]);
+    if(usersObj[point._id]) {
+      usersObj[point._id].data.totalPoints = point.points;
+      result.push(usersObj[point._id]);
+    }
   }
 
   this.body = { users: result };
